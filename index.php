@@ -8,9 +8,11 @@ $config = require('config.php');
 
 print_r(PDO::getAvailableDrivers());
 
+$id = $_GET['id'];
+$query = "SELECT * FROM users where id = :id";
 
 $db = new Database($config['database']);
-dd( $db->query("SELECT * FROM posts")->fetch() );
+dd($db->query($query, ['id' => $id])->fetch());
 
 
 
