@@ -1,20 +1,18 @@
 <?php
 
-// Connect to our MySQK database.
+// Connect to our MySQL database.
 
 class Database
 {
     public $connection;
-    public function __construct()
+    public function __construct($config, $username = 'root', $password = 'root')
     {
+            
+        $dsn = 'mysql:'.http_build_query($config, '', ';');
 
-        $host = 'localhost';
-        $dbname = 'myapp';
-        $user = 'root';
-        $password = 'root';
-        $dsn = "mysql:host=localhost;port=3306;dbname=$dbname;user=$user;password=$password;charset=utf8mb4";
-
-        $this->connection = new PDO($dsn);
+        $this->connection = new PDO($dsn, $username, $password, [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
     }
 
     public function query($query)
@@ -22,7 +20,7 @@ class Database
         $statement = $this->connection->prepare($query);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);  
+        return $statement; 
         //return $statement->fetch(PDO::FETCH_ASSOC);  apenas o primeiro registro
     }
 }
