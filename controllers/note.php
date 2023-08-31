@@ -15,7 +15,13 @@ $query = "SELECT * FROM posts where id = :id";
 dd($db->query($query, ['id' => $id])->fetch());
 */
 
+if (!$note) {
+    abort();
+}
 
+if ($note['user_id'] != 1) {
+    abort(Response::FORBIDDEN);
+}
 include "views/note.view.php"; 
 
 ?>
