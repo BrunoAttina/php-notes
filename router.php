@@ -1,3 +1,6 @@
+<html>
+    <head><title>Capturando Dados</title></head>
+</html>
 <?php 
 
 
