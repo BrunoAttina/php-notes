@@ -10,7 +10,7 @@
     </p>
   
     <p class="">
-        <?= $note['body'] ?>
+        <?= htmlspecialchars($note['body']) ?>
     </p>
   </div>
 </main>
